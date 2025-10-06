@@ -16,7 +16,7 @@ jobs:
 
     runs-on: ${{ matrix.runner }}
 
-    name: ${{ matrix.runner }}, golang:${{ matrix.go }}, amazon/dynamodb-local:${{ matrix.dynamodb-local }}, adobe/s3mock:${{ matrix.s3mock }}, elasticsearch:${{ matrix.elasticsearch-v7 }}, elasticsearch:${{ matrix.elasticsearch-v8 }}, mongo:${{ matrix.mongo }}, redis:${{ matrix.redis }}, clickhouse/clickhouse-server:${{ matrix.clickhouse }}, mysql:${{ matrix.mysql }}, postgres:${{ matrix.postgres }}
+    name: ${{ matrix.runner }}, golang:${{ matrix.go }}
 
     steps:
       - uses: actions/checkout@v5
@@ -40,5 +40,6 @@ jobs:
           gobadge -text="Go Coverage" -filename=coverage.out
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git switch ${{ github.ref_name }}
           git commit --message "Update coverage badge" README.md
           git push
