@@ -1,0 +1,57 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: coverage badge
+
+on:
+  pull_request:
+    branches: [ "**" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        runner: [ 'ubuntu-24.04' ]
+        go: [ '1.25.1' ]
+
+    runs-on: ${{ matrix.runner }}
+
+    name: ${{ matrix.runner }}, golang:${{ matrix.go }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.COVERAGE_BADGE_TOKEN }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: ${{ matrix.go }}
+          cache-dependency-path: |
+            go.sum
+
+      - name: Test
+        run: |
+          go test -v -race -coverprofile=coverage.out -cover ./...
+          go tool cover -func=coverage.out -o=coverage.out
+
+      - name: Update README.md
+        run: |
+          go install github.com/AlexBeauchemin/gobadge@latest
+          gobadge -filename=coverage.out
+
+      - name: Verify Changed files
+        uses: tj-actions/verify-changed-files@v20
+        id: verify-changed-files
+        with:
+          files: README.md
+
+      - name: Push README.md
+        if: steps.verify-changed-files.outputs.files_changed == 'true'  
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git commit --message "Update coverage badge" README.md
+          git push
