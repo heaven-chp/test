@@ -50,5 +50,5 @@ jobs:
         if: steps.verify-changed-files.outputs.files_changed == 'true'
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ github.COVERAGE_BADGE_TOKEN }}
+          github_token: ${{ secrets.COVERAGE_BADGE_TOKEN }}
           branch: ${{ github.head_ref }}
