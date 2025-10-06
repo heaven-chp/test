@@ -5,7 +5,7 @@ name: coverage
 
 on:
   pull_request:
-    branches: [ "**" ]
+    branches: [ "main" ]
 
 jobs:
   build:
