@@ -1,4 +1,5 @@
 # test
+![Coverage](https://img.shields.io/badge/Coverage-100.0%25-brightgreen)
 
 [![GitHub license](https://img.shields.io/github/license/heaven-chp/test)](https://github.com/heaven-chp/test/blob/main/LICENSE)
 [![Go Reference](https://pkg.go.dev/badge/github.com/heaven-chp/test.svg)](https://pkg.go.dev/github.com/heaven-chp/test)
