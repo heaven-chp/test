@@ -1,6 +1,7 @@
 # test
 ![Go Coverage](https://img.shields.io/badge/Go+Coverage-5-red)
 ![Go Coverage](https://img.shields.io/badge/Go+Coverage-5-red)
+![Go Coverage](https://img.shields.io/badge/Go+Coverage-5-red)
 
 [![GitHub license](https://img.shields.io/github/license/heaven-chp/test)](https://github.com/heaven-chp/test/blob/main/LICENSE)
 [![Go Reference](https://pkg.go.dev/badge/github.com/heaven-chp/test.svg)](https://pkg.go.dev/github.com/heaven-chp/test)
